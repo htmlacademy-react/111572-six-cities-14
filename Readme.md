@@ -1,7 +1,7 @@
 # Личный проект «Шесть городов»
 
 * Студент: [Мария Машнина](https://up.htmlacademy.ru/react/14/user/111572).
-* Наставник: `Yulia Volkova`.
+* Наставник: [Yulia Volkova](https://htmlacademy.ru//profile/id423707).
 
 ---
 
