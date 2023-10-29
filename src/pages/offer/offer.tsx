@@ -89,14 +89,14 @@ function Offer():JSX.Element {
                 <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{item.review.length}</span></h2>
                 <ul className="reviews__list">
                   {item.review.map((p)=>(
-                    <Review id={p.id} name={p.name} raiting={p.raiting} avatarUrl={p.avatarUrl} description={p.description} date={p.date} />
+                    <Review key={p.id} id={p.id} name={p.name} raiting={p.raiting} avatarUrl={p.avatarUrl} description={p.description} date={p.date} />
                   ))}
                 </ul>
                 <form className="reviews__form form" action="#" method="post">
                   <label className="reviews__label form__label" htmlFor="review">Your review</label>
                   <div className="reviews__rating-form form__rating">
                     {StarRaiting.map((star)=>(
-                      <Star id={star.id} number={star.number} title={star.title} />
+                      <Star key={star.id} id={star.id} number={star.number} title={star.title} />
                     ))}
                   </div>
                   <textarea className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved"></textarea>
