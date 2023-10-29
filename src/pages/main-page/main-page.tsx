@@ -6,14 +6,14 @@ import Map from '../../components/map/map';
 import CardList from '../../components/cardList/cardList';
 
 
-function mainPage(): JSX.Element {
+function MainPage(): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <Header />
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
-          <CitiesList citiesArray={cities} />
+          <CitiesList CitiesList={cities} />
         </div>
         <div className="cities">
           <div className="cities__places-container container">
@@ -47,4 +47,4 @@ function mainPage(): JSX.Element {
   );
 }
 
-export default mainPage;
+export default MainPage;

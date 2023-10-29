@@ -9,6 +9,40 @@ export const cities: string[] = [
   'Dusseldorf'
 ];
 
+export type StarRaitingList = {
+  id: number;
+  number: number;
+  title: string;
+}
+
+export const StarRaiting: StarRaitingList[] = [
+  {
+    id: 1,
+    number: 1,
+    title: 'terribly'
+  },
+  {
+    id: 2,
+    number: 2,
+    title: 'badly'
+  },
+  {
+    id: 3,
+    number: 3,
+    title: 'not bad'
+  },
+  {
+    id: 4,
+    number: 4,
+    title: 'good'
+  },
+  {
+    id: 5,
+    number: 5,
+    title: 'perfect'
+  }
+];
+
 export type CardOfferedList = {
   id: number;
   src: string;
@@ -91,7 +125,7 @@ export type CardOffered = {
   raiting: number;
   inside: string[];
   host: CardOfferedHost;
-  review: CardOfferedReview;
+  review: CardOfferedReview[];
 }
 
 export const offerData: CardOffered[] = [
@@ -131,13 +165,31 @@ export const offerData: CardOffered[] = [
       avatarUrl: 'img/avatar-angelina.jpg',
       text: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century. <br/> An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.'
     },
-    review: {
-      id: 1,
-      name: 'Max',
-      avatarUrl: 'img/avatar-max.jpg',
-      description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.',
-      raiting: 4,
-      date: 'April 2019'
-    }
+    review: [
+      {
+        id: 1,
+        name: 'Max',
+        avatarUrl: 'img/avatar-max.jpg',
+        description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.',
+        raiting: 4,
+        date: 'April 2019'
+      },
+      {
+        id: 2,
+        name: 'Emma',
+        avatarUrl: 'img/emma.jpg',
+        description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.',
+        raiting: 5,
+        date: 'April 2021'
+      },
+      {
+        id: 3,
+        name: 'Kim K.',
+        avatarUrl: 'img/kim.jpg',
+        description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.',
+        raiting: 3,
+        date: 'February 2020'
+      }
+    ]
   }
 ];
