@@ -1,7 +1,7 @@
 import Card from '../../components/card/card';
 import { offersData } from '../../const';
 
-function cardList (): JSX.Element {
+function CardList (): JSX.Element {
   return (
     <div className="cities__places-list places__list tabs__content">
       {offersData.map((offer) => (
@@ -11,4 +11,4 @@ function cardList (): JSX.Element {
   );
 }
 
-export default cardList;
+export default CardList;

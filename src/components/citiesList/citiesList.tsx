@@ -2,7 +2,7 @@ type citiesListProps = {
     CitiesList: string[];
 }
 
-function citiesList({CitiesList}: citiesListProps): JSX.Element {
+function CitiesList({CitiesList}: citiesListProps): JSX.Element {
   return (
     <section className="locations container">
       <ul className="locations__list tabs__list">
@@ -18,4 +18,4 @@ function citiesList({CitiesList}: citiesListProps): JSX.Element {
   );
 }
 
-export default citiesList;
+export default CitiesList;
