@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { cities } from '../../const';
 import Header from '../../components/header/header';
-import CitiesList from '../../components/citiesList/citiesList';
+import CitiesListComponent from '../../components/citiesList/citiesList';
 import Map from '../../components/map/map';
 import CardList from '../../components/cardList/cardList';
 
@@ -13,7 +13,7 @@ function MainPage(): JSX.Element {
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
-          <CitiesList CitiesList={cities} />
+          <CitiesListComponent citiesList={cities} />
         </div>
         <div className="cities">
           <div className="cities__places-container container">
