@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import Header from '../../components/header/header';
 import { offersData } from '../../const';
 import Card from '../../components/card/card';
@@ -6,6 +7,7 @@ import Card from '../../components/card/card';
 function Favorites(): JSX.Element{
   return (
     <div className="page">
+      <Helmet>6 cities - Favorites</Helmet>
       <Header />
       <section className="favorites">
         <h1 className="favorites__title">Saved listing</h1>
