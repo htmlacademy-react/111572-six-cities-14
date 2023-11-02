@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 type CardProps = {
     title: string;
     price: number;
@@ -14,9 +16,9 @@ function Card({title, price, src, premium, typePlace}: CardProps):JSX.Element {
           <span>Premium</span>
         </div>}
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <a href="#">
+        <Link href="#">
           <img className="place-card__image" src={src} width={260} height={200} alt="Place image" />
-        </a>
+        </Link>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
@@ -38,7 +40,7 @@ function Card({title, price, src, premium, typePlace}: CardProps):JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{title}</a>
+          <Link href="#">{title}</Link>
         </h2>
         <p className="place-card__type">{typePlace}</p>
       </div>

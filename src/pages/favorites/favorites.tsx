@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import Header from '../../components/header/header';
 import { offersData } from '../../const';
@@ -15,9 +16,9 @@ function Favorites(): JSX.Element{
           <li className="favorites__locations-items">
             <div className="favorites__locations locations locations--current">
               <div className="locations__item">
-                <a className="locations__item-link" href="#">
+                <Link className="locations__item-link" href="#">
                   <span>Amsterdam</span>
-                </a>
+                </Link>
               </div>
             </div>
             <div className="favorites__places">
@@ -29,9 +30,9 @@ function Favorites(): JSX.Element{
           <li className="favorites__locations-items">
             <div className="favorites__locations locations locations--current">
               <div className="locations__item">
-                <a className="locations__item-link" href="#">
+                <Link className="locations__item-link" href="#">
                   <span>Cologne</span>
-                </a>
+                </Link>
               </div>
             </div>
             <div className="favorites__places">
