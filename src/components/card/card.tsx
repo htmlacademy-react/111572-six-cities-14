@@ -16,7 +16,7 @@ function Card({title, price, src, premium, typePlace}: CardProps):JSX.Element {
           <span>Premium</span>
         </div>}
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <Link href="#">
+        <Link to="#">
           <img className="place-card__image" src={src} width={260} height={200} alt="Place image" />
         </Link>
       </div>
@@ -40,7 +40,7 @@ function Card({title, price, src, premium, typePlace}: CardProps):JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link href="#">{title}</Link>
+          <Link to="#">{title}</Link>
         </h2>
         <p className="place-card__type">{typePlace}</p>
       </div>

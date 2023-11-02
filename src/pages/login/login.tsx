@@ -34,7 +34,7 @@ function Login() {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <Link className="locations__item-link" href="#">
+              <Link to="#" className="locations__item-link">
                 <span>Amsterdam</span>
               </Link>
             </div>
