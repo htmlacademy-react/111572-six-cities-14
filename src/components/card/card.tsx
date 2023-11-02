@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
+import { AppRoute } from '../../const';
 
 type CardProps = {
+    id: number;
     title: string;
     price: number;
     src: string;
@@ -8,7 +10,7 @@ type CardProps = {
     typePlace: string;
 }
 
-function Card({title, price, src, premium, typePlace}: CardProps):JSX.Element {
+function Card({id,title, price, src, premium, typePlace}: CardProps):JSX.Element {
   return (
     <article className="cities__card place-card">
       {premium &&
@@ -40,7 +42,7 @@ function Card({title, price, src, premium, typePlace}: CardProps):JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to="#">{title}</Link>
+          <Link to={`${AppRoute.Offer}/${id}`}>{title}</Link>
         </h2>
         <p className="place-card__type">{typePlace}</p>
       </div>

@@ -23,7 +23,7 @@ function Favorites(): JSX.Element{
             </div>
             <div className="favorites__places">
               {offersData.map((offer) => (
-                <Card key={offer.id} src={offer.src} price={offer.price} title={offer.title} premium={offer.premium} typePlace={offer.typePlace}/>
+                <Card key={offer.id} id={offer.id} src={offer.src} price={offer.price} title={offer.title} premium={offer.premium} typePlace={offer.typePlace}/>
               ))};
             </div>
           </li>
@@ -37,7 +37,7 @@ function Favorites(): JSX.Element{
             </div>
             <div className="favorites__places">
               {offersData.map((offer) => (
-                <Card key={offer.id} src={offer.src} price={offer.price} title={offer.title} premium={offer.premium} typePlace={offer.typePlace}/>
+                <Card key={offer.id} id={offer.id} src={offer.src} price={offer.price} title={offer.title} premium={offer.premium} typePlace={offer.typePlace}/>
               ))};
             </div>
           </li>
