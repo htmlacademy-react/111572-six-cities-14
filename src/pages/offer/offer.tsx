@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import Header from '../../components/header/header';
 import Review from '../../components/review/review';
 import CardList from '../../components/cardList/cardList';
@@ -8,6 +9,7 @@ import { offerData, StarRaiting } from '../../const';
 function Offer():JSX.Element {
   return (
     <div className="page">
+      <Helmet>6 cities - Login</Helmet>
       <Header />
       {offerData.map((item) => (
         <main key={item.id} className="page__main page__main--offer">

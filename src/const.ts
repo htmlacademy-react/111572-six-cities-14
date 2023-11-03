@@ -1,5 +1,18 @@
 export const offersNumber: number = 312;
 
+export enum AppRoute {
+  Root = '/',
+  Login = '/login',
+  Favorites = '/favorites',
+  Offer = '/offer',
+}
+
+export enum AutorizationStatus {
+  Auth = 'AUTH',
+  NoAuth = 'NO_AUTH',
+  Unknown = 'UNKNOWN',
+}
+
 export const cities: string[] = [
   'Paris',
   'Cologne',

@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 type CitiesListProps = {
     citiesList: string[];
 }
@@ -8,9 +10,9 @@ function CitiesListComponent({citiesList}: CitiesListProps): JSX.Element {
       <ul className="locations__list tabs__list">
         {citiesList.map((city) => (
           <li key={city} className="locations__item">
-            <a className="locations__item-link tabs__item" href="#">
+            <Link to="#" className="locations__item-link tabs__item">
               <span>{city}</span>
-            </a>
+            </Link>
           </li>
         ))}
       </ul>
