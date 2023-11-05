@@ -1,3 +1,5 @@
+import { State } from "../node_modules/history/index";
+
 export const offersNumber: number = 312;
 
 export enum AppRoute {
@@ -26,6 +28,7 @@ export type StarRaitingList = {
   id: number;
   number: number;
   title: string;
+  handleRatingChange: (number: number) => void;
 }
 
 export type CardOfferedList = {

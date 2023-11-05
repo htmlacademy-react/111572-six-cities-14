@@ -2,10 +2,9 @@ import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
 import Header from '../../components/header/header';
 import Review from '../../components/review/review';
+import FormReview from '../../components/form/form'
 import CardList from '../../components/cardList/cardList';
-import Star from '../../components/star/star';
 import { offerSingleData } from '../../mocks/offer';
-import { StarRaiting } from '../../mocks/starRating';
 
 function Offer():JSX.Element {
 
@@ -101,21 +100,7 @@ function Offer():JSX.Element {
                     <Review key={p.id} id={p.id} name={p.name} raiting={p.raiting} avatarUrl={p.avatarUrl} description={p.description} date={p.date} />
                   ))}
                 </ul>
-                <form className="reviews__form form" action="#" method="post">
-                  <label className="reviews__label form__label" htmlFor="review">Your review</label>
-                  <div className="reviews__rating-form form__rating">
-                    {StarRaiting.map((star)=>(
-                      <Star key={star.id} id={star.id} number={star.number} title={star.title} />
-                    ))}
-                  </div>
-                  <textarea className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved"></textarea>
-                  <div className="reviews__button-wrapper">
-                    <p className="reviews__help">
-                      To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
-                    </p>
-                    <button className="reviews__submit form__submit button" type="submit">Submit</button>
-                  </div>
-                </form>
+                <FormReview />
               </section>
             </div>
             <section className="offer__map map"></section>
