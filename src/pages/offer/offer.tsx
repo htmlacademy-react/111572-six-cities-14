@@ -10,7 +10,7 @@ function Offer():JSX.Element {
 
   const paramsId = useParams();
   const offerFilterArray = offerSingleData.filter((i) =>
-    i.id == paramsId.id
+    i.id === paramsId.id
   );
   return (
     <div className="page">
