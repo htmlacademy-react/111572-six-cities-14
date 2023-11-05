@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import Header from '../../components/header/header';
-import { offersData } from '../../const';
+import { offersData } from '../../mocks/offers';
 import Card from '../../components/card/card';
 
 

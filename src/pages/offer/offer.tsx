@@ -1,17 +1,24 @@
 import { Helmet } from 'react-helmet-async';
+import { useParams } from 'react-router-dom';
 import Header from '../../components/header/header';
 import Review from '../../components/review/review';
 import CardList from '../../components/cardList/cardList';
 import Star from '../../components/star/star';
-import { offerData, StarRaiting } from '../../const';
-
+import { offerSingleData } from '../../mocks/offer';
+import { StarRaiting } from '../../mocks/starRating';
 
 function Offer():JSX.Element {
+
+  const paramsId = useParams();
+  const offerFilterArray = offerSingleData.filter((i) =>
+    i.id == paramsId.id
+  );
+  
   return (
     <div className="page">
       <Helmet>6 cities - Login</Helmet>
       <Header />
-      {offerData.map((item) => (
+      {offerFilterArray.map((item) => (
         <main key={item.id} className="page__main page__main--offer">
           <section className="offer">
             <div className="offer__gallery-container container">
@@ -72,7 +79,7 @@ function Offer():JSX.Element {
                   <h2 className="offer__host-title">Meet the host</h2>
                   <div className="offer__host-user user">
                     <div className="offer__avatar-wrapper offer__avatar-wrapper--pro user__avatar-wrapper">
-                      <img className="offer__avatar user__avatar" src={item.host.avatarUrl} width="74" height="74" alt="Host avatar" />
+                      <img className="offer__avatar user__avatar" src={item.host.avatarUrl} style={{width: '100%', height:'100%', objectFit:'contain'}} alt="Host avatar" />
                     </div>
                     <span className="offer__user-name">
                       {item.host.name}
