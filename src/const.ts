@@ -1,5 +1,3 @@
-import { State } from "../node_modules/history/index";
-
 export const offersNumber: number = 312;
 
 export enum AppRoute {
@@ -59,7 +57,7 @@ export type CardOfferedReview = {
 
 export type CardOffered = {
   id: number;
-  city: string,
+  city: string;
   images: string[];
   price: number;
   title: string;

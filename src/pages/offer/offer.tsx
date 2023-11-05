@@ -2,7 +2,7 @@ import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
 import Header from '../../components/header/header';
 import Review from '../../components/review/review';
-import FormReview from '../../components/form/form'
+import FormReview from '../../components/form/form';
 import CardList from '../../components/cardList/cardList';
 import { offerSingleData } from '../../mocks/offer';
 
@@ -12,7 +12,6 @@ function Offer():JSX.Element {
   const offerFilterArray = offerSingleData.filter((i) =>
     i.id == paramsId.id
   );
-  
   return (
     <div className="page">
       <Helmet>6 cities - Login</Helmet>
