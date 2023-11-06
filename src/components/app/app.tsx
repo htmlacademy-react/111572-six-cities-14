@@ -14,7 +14,7 @@ function App(): JSX.Element {
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
-          <Route path={AppRoute.Root} element={ <MainPage/> } />
+          <Route path={`${AppRoute.Root}/:city`} element={ <MainPage/> } />
           <Route path={AppRoute.Login} element={<Login/>} />
           <Route path={AppRoute.Favorites} element={<PrivateRoute autorizationStatus={AutorizationStatus.NoAuth}><Favorites /></PrivateRoute>}/>
           <Route path={`${AppRoute.Offer}/:id`} element={<Offer/>} />

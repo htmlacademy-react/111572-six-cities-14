@@ -1,6 +1,6 @@
 
 import{ useState } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import classes from './style.module.css';
 
 type CitiesListProps = {
@@ -9,7 +9,6 @@ type CitiesListProps = {
 
 function CitiesListComponent({citiesList}: CitiesListProps): JSX.Element {
   const [activeLink, setActiveCity] = useState(0);
-
   return (
     <section className='locations container'>
       <ul className='locations__list tabs__list'>
@@ -17,9 +16,9 @@ function CitiesListComponent({citiesList}: CitiesListProps): JSX.Element {
           <li key={city} onClick={() => setActiveCity(index)}
             className={activeLink === index ? classes['active'] : ''}
           >
-            <Link to="/" className="locations__item-link tabs__item">
+            <NavLink to={`http://localhost:5173/${city}`} className="locations__item-link tabs__item">
               <span>{city}</span>
-            </Link>
+            </NavLink>
           </li>
         ))}
       </ul>
