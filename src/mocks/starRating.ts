@@ -1,4 +1,4 @@
-export const StarRaiting = [
+export const starRaiting = [
   {
     id: 5,
     number: 5,

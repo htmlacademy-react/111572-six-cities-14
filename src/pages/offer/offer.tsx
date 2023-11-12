@@ -2,7 +2,7 @@ import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
 import Header from '../../components/header/header';
 import Review from '../../components/review/review';
-import FormReview from '../../components/form/form';
+import FormReview from '../../components/formReview/formReview';
 import CardList from '../../components/cardList/cardList';
 import { offerSingleData } from '../../mocks/offer';
 
@@ -108,7 +108,7 @@ function Offer():JSX.Element {
             <section className="near-places places">
               <h2 className="near-places__title">Other places in the neighbourhood</h2>
               <div className="near-places__list places__list">
-                <CardList />
+                <CardList offersCardList={offerSingleData} />
               </div>
             </section>
           </div>

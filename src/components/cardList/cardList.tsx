@@ -1,19 +1,21 @@
 import Card from '../../components/card/card';
-import { useParams } from 'react-router-dom';
+import { CardOffered } from '../../const';
 import { offerSingleData } from '../../mocks/offer';
 
-
-function CardList (): JSX.Element {
-  const params = useParams();
-  const offersFilterArray = offerSingleData.filter((i) =>
-    i.city === params.city
-  );
+type CardListProps = {
+  offersCardList: CardOffered[];
+}
+function CardList ({offersCardList}: CardListProps): JSX.Element {
+  //const params = useParams();
+  //const offersFilterArray = offerSingleData.filter((i) =>
+  //i.city === params.city
+  //);
 
   return (
     <>
       <h2 className="visually-hidden">Places</h2>
       <b className="places__found">
-        {offersFilterArray.length} places to stay in {params.city}
+        {offerSingleData.length} places to stay in Amsterdam
       </b>
       <form className="places__sorting" action="#" method="get">
         <span className="places__sorting-caption">Sort by</span>
@@ -31,7 +33,7 @@ function CardList (): JSX.Element {
         </ul>
       </form>
       <div className="cities__places-list places__list tabs__content">
-        {offersFilterArray.map((offer) => (
+        {offersCardList.map((offer) => (
           <Card key={offer.id} id={offer.id} src={offer.images[0]} price={offer.price} title={offer.title} premium={offer.premium} typePlace={offer.typePlace}/>
         ))};
       </div>

@@ -1,12 +1,14 @@
 import { Helmet } from 'react-helmet-async';
-import { cities } from '../../const';
+import { CardOffered, cities } from '../../const';
 import Header from '../../components/header/header';
 import CitiesListComponent from '../../components/citiesList/citiesList';
 import Map from '../../components/map/map';
 import CardList from '../../components/cardList/cardList';
 
-
-function MainPage(): JSX.Element {
+type MainPageProps = {
+  offersMainPage: CardOffered[];
+}
+function MainPage({offersMainPage}: MainPageProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <Helmet>6 cities - Main</Helmet>
@@ -19,7 +21,7 @@ function MainPage(): JSX.Element {
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
-              <CardList />
+              <CardList offersCardList={offersMainPage} />
             </section>
             <Map />
           </div>

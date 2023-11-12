@@ -12,10 +12,15 @@ type CardProps = {
 }
 
 function Card({id,title, price, src, premium, typePlace}: CardProps):JSX.Element {
-  const [, setIsActive] = useState(false);
-
+  const [isActive, setIsActive] = useState<boolean>(false);
+  const handleMouseEnter = () => {
+    setIsActive(true);
+  };
+  const handleMouseLeave = () => {
+    setIsActive(false);
+  };
   return (
-    <article onMouseEnter={() => setIsActive(true)} onMouseOut={() => setIsActive(false)} className="cities__card place-card">
+    <article onMouseEnter={handleMouseEnter} onMouseOut={handleMouseLeave} className={`cities__card place-card ${isActive ? 'place__card--active' : ''}`}>
       {premium &&
         <div className="place-card__mark">
           <span>Premium</span>
