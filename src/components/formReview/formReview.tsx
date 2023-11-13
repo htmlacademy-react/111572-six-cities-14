@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { starRaiting } from '../../mocks/starRating';
-import Star from '../../components/star/star';
+import Star from '../star/star';
 import { MIN_COMMENT_LENGTH, MAX_COMMENT_LENGTH } from '../../const';
 
 function ReviewForm():JSX.Element {
