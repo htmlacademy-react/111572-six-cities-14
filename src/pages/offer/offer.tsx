@@ -1,17 +1,22 @@
 import { Helmet } from 'react-helmet-async';
+import { useParams } from 'react-router-dom';
 import Header from '../../components/header/header';
 import Review from '../../components/review/review';
+import FormReview from '../../components/formReview/formReview';
 import CardList from '../../components/cardList/cardList';
-import Star from '../../components/star/star';
-import { offerData, StarRaiting } from '../../const';
-
+import { offerSingleData } from '../../mocks/offer';
 
 function Offer():JSX.Element {
+
+  const paramsId = useParams();
+  const offerFilterArray = offerSingleData.filter((i) =>
+    i.id === Number(paramsId.id)
+  );
   return (
     <div className="page">
       <Helmet>6 cities - Login</Helmet>
       <Header />
-      {offerData.map((item) => (
+      {offerFilterArray.map((item) => (
         <main key={item.id} className="page__main page__main--offer">
           <section className="offer">
             <div className="offer__gallery-container container">
@@ -72,7 +77,7 @@ function Offer():JSX.Element {
                   <h2 className="offer__host-title">Meet the host</h2>
                   <div className="offer__host-user user">
                     <div className="offer__avatar-wrapper offer__avatar-wrapper--pro user__avatar-wrapper">
-                      <img className="offer__avatar user__avatar" src={item.host.avatarUrl} width="74" height="74" alt="Host avatar" />
+                      <img className="offer__avatar user__avatar" src={item.host.avatarUrl} style={{width: '100%', height:'100%', objectFit:'contain'}} alt="Host avatar" />
                     </div>
                     <span className="offer__user-name">
                       {item.host.name}
@@ -94,21 +99,7 @@ function Offer():JSX.Element {
                     <Review key={p.id} id={p.id} name={p.name} raiting={p.raiting} avatarUrl={p.avatarUrl} description={p.description} date={p.date} />
                   ))}
                 </ul>
-                <form className="reviews__form form" action="#" method="post">
-                  <label className="reviews__label form__label" htmlFor="review">Your review</label>
-                  <div className="reviews__rating-form form__rating">
-                    {StarRaiting.map((star)=>(
-                      <Star key={star.id} id={star.id} number={star.number} title={star.title} />
-                    ))}
-                  </div>
-                  <textarea className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved"></textarea>
-                  <div className="reviews__button-wrapper">
-                    <p className="reviews__help">
-                      To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
-                    </p>
-                    <button className="reviews__submit form__submit button" type="submit">Submit</button>
-                  </div>
-                </form>
+                <FormReview />
               </section>
             </div>
             <section className="offer__map map"></section>
@@ -117,7 +108,7 @@ function Offer():JSX.Element {
             <section className="near-places places">
               <h2 className="near-places__title">Other places in the neighbourhood</h2>
               <div className="near-places__list places__list">
-                <CardList />
+                <CardList offersCardList={offerSingleData} />
               </div>
             </section>
           </div>

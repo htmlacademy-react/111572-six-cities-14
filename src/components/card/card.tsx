@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 import { AppRoute } from '../../const';
 
 type CardProps = {
@@ -11,8 +12,15 @@ type CardProps = {
 }
 
 function Card({id,title, price, src, premium, typePlace}: CardProps):JSX.Element {
+  const [isActive, setIsActive] = useState<boolean>(false);
+  const handleMouseEnter = () => {
+    setIsActive(true);
+  };
+  const handleMouseLeave = () => {
+    setIsActive(false);
+  };
   return (
-    <article className="cities__card place-card">
+    <article onMouseEnter={handleMouseEnter} onMouseOut={handleMouseLeave} className={`cities__card place-card ${isActive ? 'place__card--active' : ''}`}>
       {premium &&
         <div className="place-card__mark">
           <span>Premium</span>
