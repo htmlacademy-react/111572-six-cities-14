@@ -1,10 +1,13 @@
 import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
+import { CITY } from '../../mocks/city';
+import { POINTS } from '../../mocks/points';
 import Header from '../../components/header/header';
-import Review from '../../components/review/review';
 import FormReview from '../../components/formReview/formReview';
 import CardList from '../../components/cardList/cardList';
+import ReviewsList from '../../components/reviewsList/reviewsList';
 import { offerSingleData } from '../../mocks/offer';
+import Map from '../../components/map/map';
 
 function Offer():JSX.Element {
 
@@ -12,6 +15,8 @@ function Offer():JSX.Element {
   const offerFilterArray = offerSingleData.filter((i) =>
     i.id === Number(paramsId.id)
   );
+  const currentPoint = POINTS.find((point) => point.id === Number(paramsId.id));
+  const nearPalces = offerSingleData.filter((offer) => offer.id !== paramsId.id).slice(0, 3);
   return (
     <div className="page">
       <Helmet>6 cities - Login</Helmet>
@@ -93,22 +98,17 @@ function Offer():JSX.Element {
                 </div>
               </div>
               <section className="offer__reviews reviews">
-                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{item.review.length}</span></h2>
-                <ul className="reviews__list">
-                  {item.review.map((p)=>(
-                    <Review key={p.id} id={p.id} name={p.name} raiting={p.raiting} avatarUrl={p.avatarUrl} description={p.description} date={p.date} />
-                  ))}
-                </ul>
+                <ReviewsList />
                 <FormReview />
               </section>
             </div>
-            <section className="offer__map map"></section>
+            <Map city={CITY} points={POINTS} selectedPoint={currentPoint} />
           </section>
           <div className="container">
             <section className="near-places places">
               <h2 className="near-places__title">Other places in the neighbourhood</h2>
               <div className="near-places__list places__list">
-                <CardList offersCardList={offerSingleData} />
+                <CardList offersCardList={nearPalces} />
               </div>
             </section>
           </div>

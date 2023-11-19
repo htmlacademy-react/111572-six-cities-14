@@ -4,8 +4,9 @@ import { offerSingleData } from '../../mocks/offer';
 
 type CardListProps = {
   offersCardList: CardOffered[];
+  onCardHover?: (id: CardOffered['id'] | null) => void;
 }
-function CardList ({offersCardList}: CardListProps): JSX.Element {
+function CardList ({offersCardList, onCardHover }: CardListProps): JSX.Element {
   //const params = useParams();
   //const offersFilterArray = offerSingleData.filter((i) =>
   //i.city === params.city
@@ -34,7 +35,7 @@ function CardList ({offersCardList}: CardListProps): JSX.Element {
       </form>
       <div className="cities__places-list places__list tabs__content">
         {offersCardList.map((offer) => (
-          <Card key={offer.id} id={offer.id} src={offer.images[0]} price={offer.price} title={offer.title} premium={offer.premium} typePlace={offer.typePlace}/>
+          <Card key={offer.id} id={offer.id} city={offer.city} src={offer.images[0]} price={offer.price} title={offer.title} premium={offer.premium} typePlace={offer.typePlace} onCardHover={onCardHover}/>
         ))};
       </div>
     </>
