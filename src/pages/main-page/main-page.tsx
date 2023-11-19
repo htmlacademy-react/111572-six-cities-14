@@ -16,7 +16,7 @@ function MainPage({offersMainPage, city, points}: MainPageProps): JSX.Element {
     undefined
   );
 
-  const handleListItemHover = (id: number) => {
+  const handleListItemHover = (id: number | null) => {
     const currentPoint = points.find((point) => point.id === id);
     setSelectedPoint(currentPoint);
   };

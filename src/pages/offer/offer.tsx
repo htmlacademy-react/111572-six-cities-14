@@ -16,7 +16,7 @@ function Offer():JSX.Element {
     i.id === Number(paramsId.id)
   );
   const currentPoint = POINTS.find((point) => point.id === Number(paramsId.id));
-  const nearPalces = offerSingleData.filter((offer) => offer.id !== paramsId.id).slice(0, 3);
+  const nearPalces = offerSingleData.filter((offer) => offer.id !== Number(paramsId.id)).slice(0, 3);
   return (
     <div className="page">
       <Helmet>6 cities - Login</Helmet>

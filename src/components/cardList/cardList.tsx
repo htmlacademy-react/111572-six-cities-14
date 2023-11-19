@@ -7,11 +7,6 @@ type CardListProps = {
   onCardHover?: (id: CardOffered['id'] | null) => void;
 }
 function CardList ({offersCardList, onCardHover }: CardListProps): JSX.Element {
-  //const params = useParams();
-  //const offersFilterArray = offerSingleData.filter((i) =>
-  //i.city === params.city
-  //);
-
   return (
     <>
       <h2 className="visually-hidden">Places</h2>
@@ -35,7 +30,7 @@ function CardList ({offersCardList, onCardHover }: CardListProps): JSX.Element {
       </form>
       <div className="cities__places-list places__list tabs__content">
         {offersCardList.map((offer) => (
-          <Card key={offer.id} id={offer.id} city={offer.city} src={offer.images[0]} price={offer.price} title={offer.title} premium={offer.premium} typePlace={offer.typePlace} onCardHover={onCardHover}/>
+          <Card key={offer.id} id={offer.id} src={offer.images[0]} price={offer.price} title={offer.title} premium={offer.premium} typePlace={offer.typePlace} onCardHover={onCardHover}/>
         ))};
       </div>
     </>
