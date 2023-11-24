@@ -19,7 +19,7 @@ function Card({id,title, price, src, premium, typePlace, onCardHover}: CardProps
     onCardHover?.(null);
   };
   return (
-    <article onMouseEnter={handleMouseEnter} onMouseOut={handleMouseLeave} className="cities__card place-card">
+    <article onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="cities__card place-card">
       {premium &&
         <div className="place-card__mark">
           <span>Premium</span>

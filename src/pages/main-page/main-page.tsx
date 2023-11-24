@@ -5,6 +5,7 @@ import Header from '../../components/header/header';
 import CitiesListComponent from '../../components/citiesList/citiesList';
 import Map from '../../components/map/map';
 import CardList from '../../components/cardList/cardList';
+import FormSort from '../../components/form-sort/form-sort';
 
 type MainPageProps = {
   offersMainPage: CardOffered[];
@@ -32,6 +33,11 @@ function MainPage({offersMainPage, city, points}: MainPageProps): JSX.Element {
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
+              <h2 className="visually-hidden">Places</h2>
+              <b className="places__found">
+                4 places to stay in Amsterdam
+              </b>
+              <FormSort />
               <CardList offersCardList={offersMainPage} onCardHover={handleListItemHover} />
             </section>
             <Map city={city} points={points} selectedPoint={selectedPoint} />
