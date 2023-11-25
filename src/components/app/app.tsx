@@ -1,7 +1,9 @@
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { AppRoute, AutorizationStatus, CardOffered } from '../../const';
-import PrivateRoute from '../privateRoute/privateRoute';
+import { CITY } from '../../mocks/city';
+import { POINTS } from '../../mocks/points';
+import PrivateRoute from '../private-route/private-route';
 import MainPage from '../../pages/main-page/main-page';
 import Login from '../../pages/login/login';
 import Favorites from '../../pages/favorites/favorites';
@@ -16,7 +18,7 @@ function App({offers}: AppProps): JSX.Element {
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
-          <Route path={AppRoute.Root} element={ <MainPage offersMainPage={offers} /> } />
+          <Route path={AppRoute.Root} element={ <MainPage offersMainPage={offers} city={CITY} points={POINTS} /> } />
           <Route path={AppRoute.Login} element={<Login/>} />
           <Route path={AppRoute.Favorites} element={<PrivateRoute autorizationStatus={AutorizationStatus.NoAuth}><Favorites /></PrivateRoute>}/>
           <Route path={`${AppRoute.Offer}/:id`} element={<Offer/>} />
