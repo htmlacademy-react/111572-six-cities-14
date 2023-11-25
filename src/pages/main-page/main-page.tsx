@@ -2,9 +2,9 @@ import { Helmet } from 'react-helmet-async';
 import { useState } from 'react';
 import { CardOffered, cities, City, Points, Point } from '../../const';
 import Header from '../../components/header/header';
-import CitiesListComponent from '../../components/citiesList/citiesList';
+import CitiesListComponent from '../../components/cities-list/cities-list';
 import Map from '../../components/map/map';
-import CardList from '../../components/cardList/cardList';
+import CardList from '../../components/card-list/card-list';
 import FormSort from '../../components/form-sort/form-sort';
 
 type MainPageProps = {

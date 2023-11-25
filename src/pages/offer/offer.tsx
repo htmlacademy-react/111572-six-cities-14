@@ -4,8 +4,8 @@ import { CITY } from '../../mocks/city';
 import { POINTS } from '../../mocks/points';
 import Header from '../../components/header/header';
 import FormReview from '../../components/formReview/formReview';
-import CardList from '../../components/cardList/cardList';
-import ReviewsList from '../../components/reviewsList/reviewsList';
+import CardList from '../../components/card-list/card-list';
+import ReviewsList from '../../components/reviews-list/reviews-list';
 import { offerSingleData } from '../../mocks/offer';
 import Map from '../../components/map/map';
 

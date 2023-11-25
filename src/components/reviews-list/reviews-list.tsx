@@ -1,4 +1,4 @@
-import Review from '../../components/review/review';
+import Review from '../review/review';
 import {REVIEWS} from '../../mocks/reviews';
 
 function ReviewsList():JSX.Element {

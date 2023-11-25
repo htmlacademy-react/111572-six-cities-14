@@ -1,4 +1,4 @@
-import Card from '../../components/card/card';
+import Card from '../card/card';
 import { CardOffered } from '../../const';
 
 type CardListProps = {

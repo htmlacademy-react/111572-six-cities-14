@@ -3,7 +3,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import { AppRoute, AutorizationStatus, CardOffered } from '../../const';
 import { CITY } from '../../mocks/city';
 import { POINTS } from '../../mocks/points';
-import PrivateRoute from '../privateRoute/privateRoute';
+import PrivateRoute from '../private-route/private-route';
 import MainPage from '../../pages/main-page/main-page';
 import Login from '../../pages/login/login';
 import Favorites from '../../pages/favorites/favorites';
