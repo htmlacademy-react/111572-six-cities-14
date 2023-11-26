@@ -45,7 +45,7 @@ function MainPage({city, points}: MainPageProps): JSX.Element {
                 {activeCityOffers.length} places to stay in Amsterdam
               </b>
               <FormSort />
-              <CardList  offersCardList={activeCityOffers} onCardHover={handleListItemHover} />
+              <CardList offersCardList={activeCityOffers} onCardHover={handleListItemHover} />
             </section>
             <Map city={city} points={points} selectedPoint={selectedPoint} />
           </div>

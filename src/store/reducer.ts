@@ -1,10 +1,11 @@
+import { offerSingleData } from './../mocks/offer';
 import { createReducer } from '@reduxjs/toolkit';
 import { CityName, State } from '../const';
 import { changeCity, renderOffers } from './actions';
 
 const initialState: State = {
   city: CityName.Paris,
-  offers: [],
+  offers: offerSingleData,
 };
 export const reducer = createReducer(initialState, (builder) => {
   builder
