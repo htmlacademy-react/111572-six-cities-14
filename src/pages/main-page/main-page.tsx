@@ -1,17 +1,18 @@
 import { Helmet } from 'react-helmet-async';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { CardOffered, cities, City, Points, Point } from '../../const';
+import { CardOffered, cities, City, Points, Point, State } from '../../const';
 import Header from '../../components/header/header';
 import CitiesListComponent from '../../components/cities-list/cities-list';
 import Map from '../../components/map/map';
 import CardList from '../../components/card-list/card-list';
 import FormSort from '../../components/form-sort/form-sort';
-import sortOffersByName from '../../components/utils/sorted-offers-by-name'
+import sortOffersByName from '../../components/utils/sorted-offers-by-name';
+import sortedOffers from '../../components/utils/sort-offers';
 
 
 type MainPageProps = {
-  offersMainPage: CardOffered[];
+  //offersMainPage: CardOffered[];
   city: City;
   points: Points;
 }
@@ -19,10 +20,10 @@ function MainPage({city, points}: MainPageProps): JSX.Element {
   const [selectedPoint, setSelectedPoint] = useState<Point | undefined>(
     undefined
   );
-  const activeCity = useSelector((state) => state.city);
-  const offersCard = useSelector((state) => state.offers);
+  const activeCity = useSelector((state: State) => state.city);
+  const offersCard = useSelector((state: State) => state.offers);
+  const sortCards = useSelector((state: State) => state.sort);
   const activeCityOffers: CardOffered[] = sortOffersByName(activeCity, offersCard);
-  console.log(activeCityOffers, 123)
 
   const handleListItemHover = (id: number | null) => {
     const currentPoint = points.find((point) => point.id === id);
@@ -42,10 +43,10 @@ function MainPage({city, points}: MainPageProps): JSX.Element {
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">
-                {activeCityOffers.length} places to stay in Amsterdam
+                {activeCityOffers.length} places to stay in {activeCity}
               </b>
               <FormSort />
-              <CardList offersCardList={activeCityOffers} onCardHover={handleListItemHover} />
+              <CardList offersCardList={sortedOffers(activeCityOffers, sortCards)} onCardHover={handleListItemHover} />
             </section>
             <Map city={city} points={points} selectedPoint={selectedPoint} />
           </div>

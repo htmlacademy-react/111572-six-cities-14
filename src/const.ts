@@ -157,9 +157,17 @@ export const cityMapData = {
   },
 };
 
+export enum Sort {
+  Popular = 'Popular',
+  LowToHigh = 'Price: low to high',
+  HighToLow = 'Price: high to low',
+  TopRated = 'Top rated first',
+}
+
 export type State = {
   city: CityName;
   offers: CardOffered[];
+  sort: Sort;
 }
 
 

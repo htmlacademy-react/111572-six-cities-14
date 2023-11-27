@@ -1,6 +1,6 @@
 
 import { NavLink } from 'react-router-dom';
-import { AppRoute } from '../../const';
+import { AppRoute, State } from '../../const';
 import { useSelector, useDispatch } from 'react-redux';
 import { changeCity } from '../../store/actions';
 
@@ -9,7 +9,7 @@ type CitiesListProps = {
 }
 
 function CitiesListComponent({citiesList}: CitiesListProps): JSX.Element {
-  const activeCity = useSelector((state) => state.city);
+  const activeCity = useSelector((state: State) => state.city);
   const dispatch = useDispatch();
   return (
     <section className='locations container'>
