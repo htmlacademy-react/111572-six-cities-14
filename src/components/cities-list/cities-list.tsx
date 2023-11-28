@@ -9,7 +9,7 @@ type CitiesListProps = {
 }
 
 function CitiesListComponent({citiesList}: CitiesListProps): JSX.Element {
-  const activeCity = useSelector((state: State) => state.city);
+  const activeCity = useSelector((state: State) => state.city as string);
   const dispatch = useDispatch();
   return (
     <section className='locations container'>
