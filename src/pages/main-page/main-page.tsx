@@ -12,7 +12,7 @@ import sortedOffers from '../../components/utils/sort-offers';
 
 
 type MainPageProps = {
-  //offersMainPage: CardOffered[];
+  offersMainPage: CardOffered[];
   city: City;
   points: Points;
 }

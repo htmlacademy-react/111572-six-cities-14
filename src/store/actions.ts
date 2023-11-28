@@ -5,7 +5,7 @@ export const changeCity = createAction('city/changeCity', (value: CityName) => (
   payload: value,
 }));
 
-export const renderOffers = createAction('offers/renderOffers', (value: CardOffered) => ({
+export const renderOffers = createAction('offers/renderOffers', (value: CardOffered[]) => ({
   payload: value,
 }));
 
