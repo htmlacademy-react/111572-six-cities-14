@@ -1,3 +1,29 @@
+import { CardOffered } from './const';
+import { createBrowserHistory } from 'history';
+
+export enum AuthorizationStatus {
+  Auth = 'AUTH',
+  NoAuth = 'NO_AUTH',
+  Unknown = 'UNKNOWN',
+}
+
+export enum NameSpace {
+  Offers = 'OFFERS',
+  Offer = 'OFFER',
+  NearPlaces = 'NEAR_PLACES',
+  Favorites = 'FAVORITES',
+  Reviews = 'REVIEWS',
+  User = 'USER',
+}
+
+export enum APIRoute {
+  Offers = '/offers',
+  Login = '/login',
+  Logout = '/logout',
+  Reviews = '/reviews',
+  NearPlaces = 'near_places',
+}
+
 export const offersNumber: number = 312;
 
 export enum AppRoute {
@@ -46,42 +72,58 @@ export type CardOfferedHost = {
   text: string;
 };
 
-export type CardOfferedReview = {
+export type Author = {
   id: number;
   name: string;
   avatarUrl: string;
-  description: string;
+  isPro: boolean;
+}
+
+export type CardOfferedReview = {
+  id: string;
+  user: Author;
+  comment: string;
   raiting: number;
   date: string;
 };
 
 export type CardOffered = {
-  id: number;
-  city: string;
-  images: string[];
-  price: number;
+  id: string;
   title: string;
-  premium: boolean;
-  typePlace: string;
+  type: string;
+  price: number;
+  city: {
+    name: string;
+    location: {
+      latitude: number;
+      longitude: number;
+      zoom: number;
+    }
+  }
   location: {
-    title: string;
-    lat: number;
-    lng: number;
-  };
-  amountOfBedrooms: number;
-  amountOfPeople: number;
-  raiting: number;
-  inside: string[];
+    latitude: number;
+    longitude: number;
+    zoom: number;
+  }
+  isFavorite: boolean;
+  isPremium: boolean;
+  rating: number;
+  previewImage: string;
+  images: string[];
   host: CardOfferedHost;
-  onCardHover?: void;
+  onCardHover?: (id: CityPoint | null) => void;
 }
 
 export type City = {
-  title: string;
-  lat: number;
-  lng: number;
+  latitude: number;
+  longitude: number;
   zoom: number;
 };
+
+export type CityPoint={
+  id: string;
+  location: City;
+}
 
 export type Point = {
   id: number;
@@ -91,8 +133,8 @@ export type Point = {
 };
 
 export enum CityName {
-  Paris = 'Paris',
-  Cologne = 'Cologne',
+  Paris = "Paris",
+  Cologne = "Cologne",
   Brussels = 'Brussels',
   Amsterdam = 'Amsterdam',
   Hamburg = 'Hamburg',
@@ -106,56 +148,62 @@ export const CityMap: string[] = [
   'Hamburg',
   'Dusseldorf',
 ];
-export const cityMapData = {
-  Amsterdam : {
-    name: 'Amsterdam',
+
+export type cityMapArray = {
+    name: CityName;
+    location: City;
+}
+
+export const cityMapData: cityMapArray[] = [
+  {
+    name: CityName.Amsterdam,
     location: {
       latitude: 52.37454,
       longitude: 4.897976,
       zoom: 13
-    }
+    },
   },
-  Brussels : {
-    name: 'Brussels',
+  {
+    name: CityName.Brussels,
     location: {
       latitude: 50.846557,
       longitude:4.351697,
       zoom: 13
-    }
+    },
   },
-  Paris : {
-    name: 'Paris',
+  {
+    name: CityName.Paris,
     location: {
       latitude: 48.85661,
       longitude: 2.351499,
       zoom: 13
-    }
+    },
   },
-  Hamburg : {
-    name: 'Hamburg',
+  {
+    name: CityName.Hamburg,
     location: {
       latitude: 53.550341,
       longitude: 10.000654,
       zoom: 13
-    }
+    },
   },
-  Cologne : {
-    name: 'Cologne',
+  {
+    name: CityName.Cologne,
     location: {
       latitude: 50.938361,
       longitude: 6.959974,
       zoom: 13
     }
   },
-  Dusseldorf : {
-    name: 'Dusseldorf',
+  {
+    name: CityName.Dusseldorf,
     location: {
       latitude: 51.225402,
       longitude: 6.776314,
       zoom: 13
     }
   },
-};
+];
 
 export enum Sort {
   Popular = 'Popular',
@@ -168,6 +216,16 @@ export type State = {
   city: CityName;
   offers: CardOffered[];
   sort: Sort;
+  offer: null | CardOffered;
+  reviews: CardOfferedReview[];
+  reviewsSendingStatus: RequestStatus;
+}
+
+export enum RequestStatus {
+  Idle = 'IDLE',
+  Pending = 'PENDING',
+  Success = 'SUCCESS',
+  Error = 'ERROR',
 }
 
 
@@ -180,3 +238,7 @@ export const URL_MARKER_CURRENT =
 
 export const MIN_COMMENT_LENGTH = 50;
 export const MAX_COMMENT_LENGTH = 150;
+
+export const MAX_REVIEWS_COUNT = 10;
+
+export const browserHistory = createBrowserHistory();

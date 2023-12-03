@@ -1,19 +1,23 @@
 import { Link } from 'react-router-dom';
-import { AppRoute } from '../../const';
+import { AppRoute, CityPoint, City } from '../../const';
 
 type CardProps = {
-    id: number;
+    id: string;
     title: string;
     price: number;
     src: string;
     premium: boolean;
     typePlace: string;
-    onCardHover?: (id: number | null) => void;
+    location: City;
+    onCardHover?: (id: CityPoint| null) => void;
 }
 
-function Card({id,title, price, src, premium, typePlace, onCardHover}: CardProps):JSX.Element {
+function Card({id,title, price, src, premium, typePlace, location, onCardHover}: CardProps):JSX.Element {
   const handleMouseEnter = () => {
-    onCardHover?.(id);
+    onCardHover?.({
+      id: id,
+      location: location
+    });
   };
   const handleMouseLeave = () => {
     onCardHover?.(null);

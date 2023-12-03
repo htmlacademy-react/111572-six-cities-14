@@ -1,14 +1,26 @@
-import { useState } from 'react';
-import { starRaiting } from '../../mocks/starRating';
-import Star from '../star/star';
-import { MIN_COMMENT_LENGTH, MAX_COMMENT_LENGTH } from '../../const';
+import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { postReviews } from '../../store/api-action';
+//import Star from '../star/star';
+import { MIN_COMMENT_LENGTH, MAX_COMMENT_LENGTH, RequestStatus, CardOffered, State} from '../../const';
+import { fetchReviews } from '../../store/actions';
 
-function ReviewForm():JSX.Element {
-  const[comment, setComment] = useState('');
-  const [rating, setRating] = useState(0);
+type ReviewsTypeProps = {
+  offerId: CardOffered['id'];
+}
 
-  function handleRatingChange(number: number): void {
-    setRating(number);
+function ReviewForm({offerId}: ReviewsTypeProps):JSX.Element {
+  const dispatch = useDispatch();
+  const sendingStatus = useSelector((state: State) => state.reviewsSendingStatus);
+  const[comment, setComment] = useState<string>('');
+  const [rating, setRating] = useState<number | string>('');;
+
+  function handleRatingChange(evt: ChangeEvent<HTMLTextAreaElement>) {
+    setRating(evt.target.value);
+  }
+
+  function handleCommentChange(evt: ChangeEvent<HTMLTextAreaElement>) {
+    setComment(evt.target.value);
   }
 
   const isValid:boolean =
@@ -16,16 +28,61 @@ function ReviewForm():JSX.Element {
   comment.length <= MAX_COMMENT_LENGTH &&
   rating !== 0;
 
+  function handleFormSubmit(evt: FormEvent<HTMLFormElement>) {
+    evt.preventDefault();
+    dispatch(
+      postReviews({
+        offerId,
+        reviewData: {
+          comment,
+          rating: +rating,
+          user: {
+            id: 0,
+            name: '',
+            isPro: false,
+            avatarUrl: ''
+          },
+          date: ''
+        },
+      })
+    );
+  }
+
+  useEffect(() => {
+    if(sendingStatus === RequestStatus.Success) {
+      setComment('');
+      setRating('');
+      dispatch(fetchReviews());
+    }
+  }, [sendingStatus, dispatch]);
+
+  console.log(offerId,  123)
+
   return(
-    <form className="reviews__form form" action="#" method="post">
+    <form className="reviews__form form" action="#" method="post" onSubmit={handleFormSubmit}>
       <label className="reviews__label form__label" htmlFor="review">Your review (rating: {rating})</label>
       <div className="reviews__rating-form form__rating">
-        {starRaiting.map((star)=>(
-          <Star key={star.id} id={star.id} number={star.number} title={star.title} handleRatingChange={handleRatingChange} />
+      {['5', '4', '3', '2', '1'].map((value) => (
+          <React.Fragment key={value}>
+            <input
+              className="form__rating-input visually-hidden"
+              name="rating"
+              value={value}
+              id={`${value}-stars`}
+              type="radio"
+              onChange={handleRatingChange}
+              checked={rating === value}
+            />
+            <label htmlFor={`${value}-stars`} className="reviews__rating-label form__rating-label" title="rating title">
+              <svg className="form__star-image" width="37" height="33">
+                <use xlinkHref="#icon-star"></use>
+              </svg>
+            </label>
+          </React.Fragment>
         ))}
       </div>
       <textarea
-        onChange={({ target }) => setComment(target.value)}
+        onChange={handleCommentChange}
         value={comment}
         className="reviews__textarea form__textarea"
         id="review"

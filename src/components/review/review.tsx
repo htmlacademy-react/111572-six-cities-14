@@ -1,14 +1,14 @@
 import { CardOfferedReview } from '../../const';
 
-function Review({id, name, avatarUrl, description, date}: CardOfferedReview):JSX.Element {
+function Review({comment, date, user}: CardOfferedReview):JSX.Element {
   return (
-    <li key={id} className="reviews__item">
+    <li className="reviews__item">
       <div className="reviews__user user">
         <div className="reviews__avatar-wrapper user__avatar-wrapper">
-          <img className="reviews__avatar user__avatar" src={avatarUrl} width="54" height="54" alt="Reviews avatar" />
+          <img className="reviews__avatar user__avatar" src={user.avatarUrl} width="54" height="54" alt="Reviews avatar" />
         </div>
         <span className="reviews__user-name">
-          {name}
+          {user.name}
         </span>
       </div>
       <div className="reviews__info">
@@ -19,7 +19,7 @@ function Review({id, name, avatarUrl, description, date}: CardOfferedReview):JSX
           </div>
         </div>
         <p className="reviews__text">
-          {description}
+          {comment}
         </p>
         <time className="reviews__time" dateTime="2019-04-24">{date}</time>
       </div>
