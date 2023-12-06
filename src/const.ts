@@ -1,4 +1,3 @@
-import { CardOffered } from './const';
 import { createBrowserHistory } from 'history';
 
 export enum AuthorizationStatus {
@@ -11,7 +10,7 @@ export enum NameSpace {
   Offers = 'OFFERS',
   Offer = 'OFFER',
   NearPlaces = 'NEAR_PLACES',
-  Favorites = 'FAVORITES',
+  Favorites = 'favorite',
   Reviews = 'REVIEWS',
   User = 'USER',
 }
@@ -20,7 +19,7 @@ export enum APIRoute {
   Offers = '/offers',
   Login = '/login',
   Logout = '/logout',
-  Reviews = '/reviews',
+  Reviews = '/comments',
   NearPlaces = 'near_places',
 }
 
@@ -72,24 +71,34 @@ export type CardOfferedHost = {
   text: string;
 };
 
-export type Author = {
-  id: number;
+export type User = {
   name: string;
   avatarUrl: string;
   isPro: boolean;
 }
 
+export type UserAuth = User & {
+  email: string;
+  token: string;
+}
+
+export type Login = {
+  email: string;
+  password: string;
+}
+
 export type CardOfferedReview = {
   id: string;
-  user: Author;
+  user: User;
   comment: string;
-  raiting: number;
+  rating: number;
   date: string;
 };
 
 export type CardOffered = {
-  id: string;
+  id?: string;
   title: string;
+  description: string;
   type: string;
   price: number;
   city: {
@@ -98,13 +107,16 @@ export type CardOffered = {
       latitude: number;
       longitude: number;
       zoom: number;
-    }
-  }
+    };
+  };
   location: {
     latitude: number;
     longitude: number;
     zoom: number;
-  }
+  };
+  goods: string[];
+  maxAdults: number;
+  bedrooms: number;
   isFavorite: boolean;
   isPremium: boolean;
   rating: number;
@@ -120,10 +132,10 @@ export type City = {
   zoom: number;
 };
 
-export type CityPoint={
-  id: string;
+export type CityPoint = {
+  id: string | undefined;
   location: City;
-}
+};
 
 export type Point = {
   id: number;
@@ -133,13 +145,14 @@ export type Point = {
 };
 
 export enum CityName {
-  Paris = "Paris",
-  Cologne = "Cologne",
+  Paris = 'Paris',
+  Cologne = 'Cologne',
   Brussels = 'Brussels',
   Amsterdam = 'Amsterdam',
   Hamburg = 'Hamburg',
   Dusseldorf = 'Dusseldorf',
 }
+
 export const CityMap: string[] = [
   'Paris',
   'Cologne',
@@ -150,13 +163,13 @@ export const CityMap: string[] = [
 ];
 
 export type cityMapArray = {
-    name: CityName;
-    location: City;
+    name?: string;
+    location: City ;
 }
 
 export const cityMapData: cityMapArray[] = [
   {
-    name: CityName.Amsterdam,
+    name: 'Amsterdam',
     location: {
       latitude: 52.37454,
       longitude: 4.897976,
@@ -164,7 +177,7 @@ export const cityMapData: cityMapArray[] = [
     },
   },
   {
-    name: CityName.Brussels,
+    name:'Brussels',
     location: {
       latitude: 50.846557,
       longitude:4.351697,
@@ -172,7 +185,7 @@ export const cityMapData: cityMapArray[] = [
     },
   },
   {
-    name: CityName.Paris,
+    name: 'Paris',
     location: {
       latitude: 48.85661,
       longitude: 2.351499,
@@ -180,7 +193,7 @@ export const cityMapData: cityMapArray[] = [
     },
   },
   {
-    name: CityName.Hamburg,
+    name: 'Hamburg',
     location: {
       latitude: 53.550341,
       longitude: 10.000654,
@@ -188,7 +201,7 @@ export const cityMapData: cityMapArray[] = [
     },
   },
   {
-    name: CityName.Cologne,
+    name: 'Cologne',
     location: {
       latitude: 50.938361,
       longitude: 6.959974,
@@ -196,7 +209,7 @@ export const cityMapData: cityMapArray[] = [
     }
   },
   {
-    name: CityName.Dusseldorf,
+    name: 'Dusseldorf',
     location: {
       latitude: 51.225402,
       longitude: 6.776314,
@@ -212,20 +225,29 @@ export enum Sort {
   TopRated = 'Top rated first',
 }
 
-export type State = {
-  city: CityName;
-  offers: CardOffered[];
-  sort: Sort;
-  offer: null | CardOffered;
-  reviews: CardOfferedReview[];
-  reviewsSendingStatus: RequestStatus;
-}
-
 export enum RequestStatus {
   Idle = 'IDLE',
   Pending = 'PENDING',
   Success = 'SUCCESS',
   Error = 'ERROR',
+}
+
+export type State = {
+  city: CityName;
+  offers: CardOffered[];
+  sort: Sort;
+  offer: null| CardOffered;
+  offerFetchingStatus: RequestStatus;
+  offersFetchingStatus: RequestStatus;
+  reviews: CardOfferedReview[];
+  reviewsSendingStatus: RequestStatus;
+  user: null| User;
+  authorizationStatus: AuthorizationStatus;
+  nearPlaces: CardOffered[];
+  nearPlacesStatus: RequestStatus;
+  nearPlacesError: RequestStatus;
+  favorites: CardOffered[];
+  favoritesSendingStatus: RequestStatus;
 }
 
 

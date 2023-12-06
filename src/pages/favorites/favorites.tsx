@@ -1,48 +1,72 @@
+import { useEffect, useCallback} from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import Header from '../../components/header/header';
-import { offersData } from '../../mocks/offers';
-import Card from '../../components/card/card';
-
+import CardList from '../../components/card-list/card-list';
+import { useAppDispatch, useAppSelector } from '../../hooks/index';
+import { State, AppRoute, CityName } from '../../const';
+import { fetchFavorites } from '../../store/api-action';
+import pickOffersByCityName from '../../components/utils/pick-offer-by-city-name';
+import Spinner from '../../components/spinner/spinner';
+import FavoritesEmpty from '../../components/favorites-empty/favorites-empty';
+import { changeCity } from '../../store/actions';
 
 function Favorites(): JSX.Element{
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(fetchFavorites());
+  }, [dispatch]);
+
+  const favorite = useAppSelector((state: State) => state.favorites);
+  const isLoading = useAppSelector((state: State) => state.favoritesSendingStatus);
+  const hasError = useAppSelector((state: State) => state.favoritesSendingStatus);
+  const favoriteCities = Array.from(new Set(favorite.map((city) => city.city.name)));
+
+  const handleClick = useCallback((city: CityName) => {
+    dispatch(changeCity(city));
+  }, [dispatch]);
+
   return (
-    <div className="page">
-      <Helmet>6 cities - Favorites</Helmet>
+    <div className={`${favorite.length === 0 ? 'page--favorites-empty' : 'page'}`}>
       <Header />
-      <section className="favorites">
-        <h1 className="favorites__title">Saved listing</h1>
-        <ul className="favorites__list">
-          <li className="favorites__locations-items">
-            <div className="favorites__locations locations locations--current">
-              <div className="locations__item">
-                <Link to="#" className="locations__item-link">
-                  <span>Amsterdam</span>
-                </Link>
-              </div>
-            </div>
-            <div className="favorites__places">
-              {offersData.map((offer) => (
-                <Card key={offer.id} id={offer.id} src={offer.src} price={offer.price} title={offer.title} premium={offer.premium} typePlace={offer.typePlace}/>
-              ))};
-            </div>
-          </li>
-          <li className="favorites__locations-items">
-            <div className="favorites__locations locations locations--current">
-              <div className="locations__item">
-                <Link to="#" className="locations__item-link">
-                  <span>Cologne</span>
-                </Link>
-              </div>
-            </div>
-            <div className="favorites__places">
-              {offersData.map((offer) => (
-                <Card key={offer.id} id={offer.id} src={offer.src} price={offer.price} title={offer.title} premium={offer.premium} typePlace={offer.typePlace}/>
-              ))};
-            </div>
-          </li>
-        </ul>
-      </section>
+      <Helmet>
+        <title>6 Cities: Your Favorites</title>
+      </Helmet>
+      <main className={`page__main page__main--favorites ${favorite.length === 0 ? 'page__main--favorites-empty' : ''}`}>
+        {!isLoading ?
+          <div className="page__favorites-container container">
+            <Spinner />
+          </div>
+          :
+          <div className="page__favorites-container container">
+            {favorite.length !== 0 ?
+              <section className="favorites">
+                {!hasError ?
+                  <h1 className="favorites__title">Saved listing not found, please refresh</h1>
+                  :
+                  <>
+                    <h1 className="favorites__title">Saved listing</h1>
+                    <ul className="favorites__list">
+                      {favoriteCities.map((city) => (
+                        <li className="favorites__locations-items" key={city}>
+                          <div className="favorites__locations locations locations--current">
+                            <div className="locations__item">
+                              <Link className="locations__item-link" onClick={() => handleClick(city as CityName)} to={AppRoute.Root}>
+                                <span>{city}</span>
+                              </Link>
+                            </div>
+                          </div>
+                          <div className="favorites__places">
+                            <CardList offersCardList={pickOffersByCityName(city as CityName, favorite)} />
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                  </>}
+              </section> :
+              <FavoritesEmpty />}
+          </div>}
+      </main>
     </div>
   );
 }

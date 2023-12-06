@@ -1,5 +1,5 @@
 import { createAction } from '@reduxjs/toolkit';
-import { CityName, Sort, NameSpace, CardOffered, CardOfferedReview} from './../const';
+import { CityName, Sort, NameSpace, CardOffered } from './../const';
 
 
 export const changeCity = createAction('city/changeCity', (value: CityName) => ({

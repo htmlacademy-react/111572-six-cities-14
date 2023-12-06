@@ -1,5 +1,5 @@
 import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '../../hooks/index';
 import { postReviews } from '../../store/api-action';
 //import Star from '../star/star';
 import { MIN_COMMENT_LENGTH, MAX_COMMENT_LENGTH, RequestStatus, CardOffered, State} from '../../const';
@@ -10,59 +10,51 @@ type ReviewsTypeProps = {
 }
 
 function ReviewForm({offerId}: ReviewsTypeProps):JSX.Element {
-  const dispatch = useDispatch();
-  const sendingStatus = useSelector((state: State) => state.reviewsSendingStatus);
+  const dispatch = useAppDispatch();
+  const sendingStatus = useAppSelector((state: State) => state.reviewsSendingStatus);
   const[comment, setComment] = useState<string>('');
-  const [rating, setRating] = useState<number | string>('');;
+  const [rating, setRating] = useState<number | string>('');
 
-  function handleRatingChange(evt: ChangeEvent<HTMLTextAreaElement>) {
-    setRating(evt.target.value);
-  }
 
-  function handleCommentChange(evt: ChangeEvent<HTMLTextAreaElement>) {
+  const handleRatingChange = (evt: ChangeEvent<HTMLInputElement>) => {
+    setRating(Number(evt.target.value));
+  };
+
+  const handleCommentChange = (evt: ChangeEvent<HTMLTextAreaElement>) => {
     setComment(evt.target.value);
-  }
+  };
 
   const isValid:boolean =
   comment.length >= MIN_COMMENT_LENGTH &&
   comment.length <= MAX_COMMENT_LENGTH &&
   rating !== 0;
 
-  function handleFormSubmit(evt: FormEvent<HTMLFormElement>) {
+  const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     dispatch(
       postReviews({
         offerId,
         reviewData: {
           comment,
-          rating: +rating,
-          user: {
-            id: 0,
-            name: '',
-            isPro: false,
-            avatarUrl: ''
-          },
-          date: ''
+          rating: +rating
         },
       })
     );
-  }
+  };
 
   useEffect(() => {
     if(sendingStatus === RequestStatus.Success) {
       setComment('');
       setRating('');
-      dispatch(fetchReviews());
+      dispatch(fetchReviews(offerId));
     }
-  }, [sendingStatus, dispatch]);
-
-  console.log(offerId,  123)
+  }, [offerId, sendingStatus, dispatch]);
 
   return(
     <form className="reviews__form form" action="#" method="post" onSubmit={handleFormSubmit}>
       <label className="reviews__label form__label" htmlFor="review">Your review (rating: {rating})</label>
       <div className="reviews__rating-form form__rating">
-      {['5', '4', '3', '2', '1'].map((value) => (
+        {['5', '4', '3', '2', '1'].map((value) => (
           <React.Fragment key={value}>
             <input
               className="form__rating-input visually-hidden"

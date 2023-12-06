@@ -1,6 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 import { useState, useEffect, useCallback} from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '../../hooks/index';
 import { CardOffered, cities, State,CityPoint } from '../../const';
 import Header from '../../components/header/header';
 import CitiesListComponent from '../../components/cities-list/cities-list';
@@ -10,19 +11,15 @@ import FormSort from '../../components/form-sort/form-sort';
 import sortOffersByName from '../../components/utils/sorted-offers-by-name';
 import sortedOffers from '../../components/utils/sort-offers';
 import {fetchOffers } from '../../store/api-action';
-import {cityMapData} from '../../const'
-import markerPoints from '../../components/utils/marker-maps'
+import {cityMapData} from '../../const';
+import markerPoints from '../../components/utils/marker-maps';
 
-
-type MainPageProps = {
-  offersMainPage: CardOffered[];
-}
-function MainPage({}: MainPageProps): JSX.Element {
-  const dispatch = useDispatch();
+function MainPage(): JSX.Element {
+  const dispatch = useAppDispatch();
   const [selectedPoint, setSelectedPoint] = useState<CityPoint | null>(
     null
   );
-  const activeCity = useSelector((state: State) => state.city);
+  const activeCity = useAppSelector((state: State) => state.city);
   const offersCard = useSelector((state: State) => state.offers);
   const sortCards = useSelector((state: State) => state.sort);
   const activeCityOffers: CardOffered[] = sortOffersByName(activeCity, offersCard);

@@ -8,6 +8,7 @@ type MapProps = {
   city: cityMapArray;
   points: CityPoint[];
   selectedPoint: CityPoint | null;
+  page: 'cities' | 'offer';
 };
 
 const defaultCustomIcon = new Icon({
@@ -22,13 +23,16 @@ const currentCustomIcon = new Icon({
   iconAnchor: [20, 40]
 });
 
-function Map(props: MapProps): JSX.Element {
-  const {city, points, selectedPoint} = props;
+function Map({city, points, selectedPoint, page}: MapProps): JSX.Element {
 
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
 
   useEffect(() => {
+    if (page === 'offer' && selectedPoint !== null) {
+      points.push(selectedPoint);
+    }
+
     if (map) {
       const markerLayer = layerGroup().addTo(map);
       points.forEach((point) => {
@@ -50,7 +54,7 @@ function Map(props: MapProps): JSX.Element {
         map.removeLayer(markerLayer);
       };
     }
-  }, [map, points, selectedPoint]);
+  }, [page, map, points, selectedPoint]);
 
   return <div style={{height: '500px', width:'50%', margin:'0 auto'}} ref={mapRef}></div>;
 }
