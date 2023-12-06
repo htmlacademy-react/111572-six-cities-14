@@ -1,13 +1,17 @@
 import Review from '../review/review';
-import {REVIEWS} from '../../mocks/reviews';
+import { CardOfferedReview, CardOffered} from '../../const';
 
-function ReviewsList():JSX.Element {
+type ReviewListPropsType = {
+  reviews: CardOfferedReview[];
+  id: CardOffered['id'];
+}
+function ReviewsList({reviews, id}: ReviewListPropsType):JSX.Element {
   return (
     <>
-      <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{REVIEWS.length}</span></h2>
+      <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
       <ul className="reviews__list">
-        {REVIEWS.map((review)=>(
-          <Review key={review.id} id={review.id} name={review.name} raiting={review.raiting} avatarUrl={review.avatarUrl} description={review.description} date={review.date} />
+        {reviews.map((review)=>(
+          <Review key={id} review={review} />
         ))}
       </ul>
     </>

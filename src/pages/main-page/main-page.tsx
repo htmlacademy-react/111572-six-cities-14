@@ -1,7 +1,8 @@
 import { Helmet } from 'react-helmet-async';
-import { useState } from 'react';
+import { useState, useEffect, useCallback} from 'react';
 import { useSelector } from 'react-redux';
-import { CardOffered, cities, City, Points, Point, State } from '../../const';
+import { useAppDispatch, useAppSelector } from '../../hooks/index';
+import { CardOffered, State,CityPoint } from '../../const';
 import Header from '../../components/header/header';
 import CitiesListComponent from '../../components/cities-list/cities-list';
 import Map from '../../components/map/map';
@@ -9,26 +10,30 @@ import CardList from '../../components/card-list/card-list';
 import FormSort from '../../components/form-sort/form-sort';
 import sortOffersByName from '../../components/utils/sorted-offers-by-name';
 import sortedOffers from '../../components/utils/sort-offers';
+import {fetchOffers } from '../../store/api-action';
+import {cityMapData} from '../../const';
+import markerPoints from '../../components/utils/marker-maps';
 
-
-type MainPageProps = {
-  offersMainPage: CardOffered[];
-  city: City;
-  points: Points;
-}
-function MainPage({city, points}: MainPageProps): JSX.Element {
-  const [selectedPoint, setSelectedPoint] = useState<Point | undefined>(
-    undefined
+function MainPage(): JSX.Element {
+  const dispatch = useAppDispatch();
+  const [selectedPoint, setSelectedPoint] = useState<CityPoint | null>(
+    null
   );
-  const activeCity = useSelector((state: State) => state.city);
+  const activeCity = useAppSelector((state: State) => state.city);
   const offersCard = useSelector((state: State) => state.offers);
   const sortCards = useSelector((state: State) => state.sort);
   const activeCityOffers: CardOffered[] = sortOffersByName(activeCity, offersCard);
+  const cityMapNew = cityMapData.find((x) => x.name === activeCity);
+  const points: CityPoint[] = markerPoints(activeCityOffers);
 
-  const handleListItemHover = (id: number | null) => {
-    const currentPoint = points.find((point) => point.id === id);
-    setSelectedPoint(currentPoint);
-  };
+  const handleListItemHover = useCallback((point: CityPoint | null) => {
+    setSelectedPoint(point);
+  }, []);
+
+  useEffect(() => {
+    dispatch(fetchOffers());
+  }, [dispatch]);
+
   return (
     <div className="page page--gray page--main">
       <Helmet>6 cities - Main</Helmet>
@@ -36,7 +41,7 @@ function MainPage({city, points}: MainPageProps): JSX.Element {
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
-          <CitiesListComponent citiesList={cities} />
+          <CitiesListComponent/>
         </div>
         <div className="cities">
           <div className="cities__places-container container">
@@ -48,7 +53,7 @@ function MainPage({city, points}: MainPageProps): JSX.Element {
               <FormSort />
               <CardList offersCardList={sortedOffers(activeCityOffers, sortCards)} onCardHover={handleListItemHover} />
             </section>
-            <Map city={city} points={points} selectedPoint={selectedPoint} />
+            <Map city={cityMapNew!} points={points} selectedPoint={selectedPoint} page='cities' />
           </div>
         </div>
       </main>
