@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { CITY } from '../../mocks/city';
 import { POINTS } from '../../mocks/points';
 import Header from '../../components/header/header';
-import FormReview from '../../components/formReview/formReview';
+import FormReview from '../../components/form-review/form-review';
 import CardList from '../../components/card-list/card-list';
 import ReviewsList from '../../components/reviews-list/reviews-list';
 import { offerSingleData } from '../../mocks/offer';
