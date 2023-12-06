@@ -2,7 +2,7 @@ import { Helmet } from 'react-helmet-async';
 import { useState, useEffect, useCallback} from 'react';
 import { useSelector } from 'react-redux';
 import { useAppDispatch, useAppSelector } from '../../hooks/index';
-import { CardOffered, cities, State,CityPoint } from '../../const';
+import { CardOffered, State,CityPoint } from '../../const';
 import Header from '../../components/header/header';
 import CitiesListComponent from '../../components/cities-list/cities-list';
 import Map from '../../components/map/map';
@@ -41,7 +41,7 @@ function MainPage(): JSX.Element {
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
-          <CitiesListComponent citiesList={cities} />
+          <CitiesListComponent/>
         </div>
         <div className="cities">
           <div className="cities__places-container container">
@@ -53,7 +53,7 @@ function MainPage(): JSX.Element {
               <FormSort />
               <CardList offersCardList={sortedOffers(activeCityOffers, sortCards)} onCardHover={handleListItemHover} />
             </section>
-            <Map city={cityMapNew} points={points} selectedPoint={selectedPoint} />
+            <Map city={cityMapNew!} points={points} selectedPoint={selectedPoint} page='cities' />
           </div>
         </div>
       </main>

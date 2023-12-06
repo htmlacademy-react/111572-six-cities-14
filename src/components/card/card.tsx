@@ -37,7 +37,7 @@ function Card({card, onCardHover}: CardProps):JSX.Element {
           dispatch(fetchFavorites());
         });
     }
-  },[dispatch, card?.id]);
+  },[dispatch, card?.id, card?.isFavorite, navigate, authorizationStatus]);
 
   return (
     <article onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className="cities__card place-card">

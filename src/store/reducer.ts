@@ -1,5 +1,6 @@
+import { CardOffered } from './../const';
 import { createReducer } from '@reduxjs/toolkit';
-import { CityName, Sort, State, AuthorizationStatus, RequestStatus } from '../const';
+import { Sort, State, AuthorizationStatus, RequestStatus } from '../const';
 import { changeCity, changeSort } from './actions';
 import
 {
@@ -17,7 +18,7 @@ import
   from '../store/api-action';
 
 const initialState: State = {
-  city: CityName.Paris,
+  city: 'Paris',
   offers: [],
   sort: Sort.Popular,
   offer: null,
@@ -120,13 +121,13 @@ export const reducer = createReducer(initialState, (builder) => {
       state.favoritesSendingStatus = RequestStatus.Pending;
     })
     .addCase(fetchFavorites.fulfilled, (state, action) => {
-      const favorites = action.payload.map((i:any) => i.id);
-      const favoriteId = favorites.map((i:string) => i);
+      const favorites = action.payload.map((i:CardOffered) => i.id);
+      const favoriteId = favorites.map((i) => i);
       state.favoritesSendingStatus = RequestStatus.Success;
       if (action.payload) {
         state.favorites = action.payload;
       } else {
-        for(let i = 0 ; i <= favoriteId; i++){
+        for(let i = 0 ; i <= favoriteId.length; i++){
           state.favorites = state.favorites.filter((favorite) => favorite.id !== favoriteId[i]);
         }
       }

@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import Header from '../../components/header/header';
 import CardList from '../../components/card-list/card-list';
 import { useAppDispatch, useAppSelector } from '../../hooks/index';
-import { State, AppRoute, CityName } from '../../const';
+import { State, AppRoute, cityMapArray } from '../../const';
 import { fetchFavorites } from '../../store/api-action';
 import pickOffersByCityName from '../../components/utils/pick-offer-by-city-name';
 import Spinner from '../../components/spinner/spinner';
@@ -22,7 +22,7 @@ function Favorites(): JSX.Element{
   const hasError = useAppSelector((state: State) => state.favoritesSendingStatus);
   const favoriteCities = Array.from(new Set(favorite.map((city) => city.city.name)));
 
-  const handleClick = useCallback((city: CityName) => {
+  const handleClick = useCallback((city: cityMapArray['name']) => {
     dispatch(changeCity(city));
   }, [dispatch]);
 
@@ -51,13 +51,13 @@ function Favorites(): JSX.Element{
                         <li className="favorites__locations-items" key={city}>
                           <div className="favorites__locations locations locations--current">
                             <div className="locations__item">
-                              <Link className="locations__item-link" onClick={() => handleClick(city as CityName)} to={AppRoute.Root}>
+                              <Link className="locations__item-link" onClick={() => handleClick(city)} to={AppRoute.Root}>
                                 <span>{city}</span>
                               </Link>
                             </div>
                           </div>
                           <div className="favorites__places">
-                            <CardList offersCardList={pickOffersByCityName(city as CityName, favorite)} />
+                            <CardList offersCardList={pickOffersByCityName(city, favorite)} />
                           </div>
                         </li>
                       ))}

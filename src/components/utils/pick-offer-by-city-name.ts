@@ -1,6 +1,6 @@
-import { CardOffered, CityName } from './../../const';
+import { CardOffered, cityMapArray } from './../../const';
 
-export default function pickOffersByCityName(city: CityName, offers: CardOffered[]): CardOffered[] {
+export default function pickOffersByCityName(city: cityMapArray['name'], offers: CardOffered[]): CardOffered[] {
 
   return offers.filter((offer) => offer.city.name === city);
 }

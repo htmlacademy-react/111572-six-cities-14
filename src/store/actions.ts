@@ -1,8 +1,8 @@
 import { createAction } from '@reduxjs/toolkit';
-import { CityName, Sort, NameSpace, CardOffered } from './../const';
+import { cityMapArray, Sort, NameSpace, CardOffered } from './../const';
 
 
-export const changeCity = createAction('city/changeCity', (value: CityName) => ({
+export const changeCity = createAction('city/changeCity', (value: cityMapArray['name']) => ({
   payload: value,
 }));
 

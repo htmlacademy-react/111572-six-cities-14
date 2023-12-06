@@ -5,13 +5,13 @@ type ReviewListPropsType = {
   reviews: CardOfferedReview[];
   id: CardOffered['id'];
 }
-function ReviewsList({reviews}: ReviewListPropsType):JSX.Element {
+function ReviewsList({reviews, id}: ReviewListPropsType):JSX.Element {
   return (
     <>
       <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
       <ul className="reviews__list">
         {reviews.map((review)=>(
-          <Review review={review} />
+          <Review key={id} review={review} />
         ))}
       </ul>
     </>

@@ -153,14 +153,7 @@ export enum CityName {
   Dusseldorf = 'Dusseldorf',
 }
 
-export const CityMap: string[] = [
-  'Paris',
-  'Cologne',
-  'Brussels',
-  'Amsterdam',
-  'Hamburg',
-  'Dusseldorf',
-];
+export const CityMap = Object.values(CityName);
 
 export type cityMapArray = {
     name?: string;
@@ -233,7 +226,7 @@ export enum RequestStatus {
 }
 
 export type State = {
-  city: CityName;
+  city: cityMapArray['name'];
   offers: CardOffered[];
   sort: Sort;
   offer: null| CardOffered;
